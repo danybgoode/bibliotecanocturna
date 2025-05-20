@@ -42,7 +42,7 @@ async function submitSignup() {
       messageEl.style.color = "lightgreen";
       messageEl.innerText = "Account created! Redirecting to login...";
       setTimeout(() => {
-        window.location.href = "https://api.bibliotecanocturna.com.mx/login";
+        window.location.href = "https://listen.bibliotecanocturna.com.mx/login";
       }, 2000);
     } else {
       messageEl.style.color = "salmon";
