@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca Nocturna</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-black text-white font-sans leading-relaxed">
+
+  <!-- Hero Section -->
+  <section id="hero" class="text-center p-12">
+    <h1 class="text-4xl md:text-6xl font-bold">The Shudder of Audiobooks</h1>
+    <p class="mt-4 text-lg md:text-xl text-gray-300">Streaming horror & sci-fi stories that haunt, thrill, and hypnotize.</p>
+    <div class="mt-6 space-x-4">
+      <a href="#" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded text-white font-semibold">Sign Up Free</a>
+      <a href="#" class="border border-white px-6 py-3 rounded font-semibold hover:bg-white hover:text-black">Go Premium</a>
+    </div>
+  </section>
+
+  <!-- Preview Section -->
+  <section id="preview" class="p-12 bg-gray-900">
+    <h2 class="text-3xl font-bold mb-4">Listen to a Taste of the Dark</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <audio controls class="w-full bg-gray-800 rounded">
+        <source src="audio/snippet1.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <audio controls class="w-full bg-gray-800 rounded">
+        <source src="audio/snippet2.mp3" type="audio/mpeg" />
+      </audio>
+      <audio controls class="w-full bg-gray-800 rounded">
+        <source src="audio/snippet3.mp3" type="audio/mpeg" />
+      </audio>
+      <audio controls class="w-full bg-gray-800 rounded">
+        <source src="audio/snippet4.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="p-12">
+    <h2 class="text-3xl font-bold mb-6">Why Biblioteca Nocturna?</h2>
+    <ul class="grid gap-6 md:grid-cols-3 text-center">
+      <li class="bg-gray-800 p-6 rounded shadow">
+        <h3 class="text-xl font-semibold mb-2">Horror & Sci-Fi Only</h3>
+        <p class="text-gray-300">Curated for genre lovers. No fluff, no filler.</p>
+      </li>
+      <li class="bg-gray-800 p-6 rounded shadow">
+        <h3 class="text-xl font-semibold mb-2">Ad-Free Premium</h3>
+        <p class="text-gray-300">Stream without interruptions, ever.</p>
+      </li>
+      <li class="bg-gray-800 p-6 rounded shadow">
+        <h3 class="text-xl font-semibold mb-2">Mobile Access</h3>
+        <p class="text-gray-300">Listen on the go, wherever you dare.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="p-12 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold mb-6">Choose Your Plan</h2>
+    <div class="flex flex-col md:flex-row justify-center gap-6">
+      <div class="bg-gray-800 p-6 rounded shadow w-full md:w-1/3">
+        <h3 class="text-xl font-semibold mb-2">Freemium</h3>
+        <p class="text-2xl font-bold mb-4">Free</p>
+        <ul class="text-gray-300 space-y-2">
+          <li>🔊 Access to all stories</li>
+          <li>📢 Ads included</li>
+          <li>🕒 Limited offline access</li>
+        </ul>
+      </div>
+      <div class="bg-red-600 p-6 rounded shadow w-full md:w-1/3 text-white">
+        <h3 class="text-xl font-semibold mb-2">Premium</h3>
+        <p class="text-2xl font-bold mb-4">$4.99/month</p>
+        <ul class="space-y-2">
+          <li>🧠 No ads</li>
+          <li>🎧 Unlimited offline listening</li>
+          <li>📱 Mobile app access (coming soon)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section id="cta" class="p-12 text-center">
+    <h2 class="text-3xl font-bold mb-4">Ready to Enter the Dark?</h2>
+    <p class="text-lg mb-6 text-gray-300">Stream twisted tales and haunted sci-fi tonight.</p>
+    <a href="#" class="bg-red-600 hover:bg-red-700 px-8 py-4 rounded text-white font-semibold">Start Listening Free</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="p-6 bg-gray-800 text-center text-sm text-gray-400">
+    &copy; 2025 Biblioteca Nocturna. All rights reserved.
+  </footer>
+
+</body>
+</html>
