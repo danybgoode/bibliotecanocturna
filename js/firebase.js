@@ -48,7 +48,7 @@ async function googleSignIn() {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("User is logged in:", user);
-    window.location.href = "https://libreria.bibliotecanocturna.com.mx/login";
+    window.location.href = "https://listen.bibliotecanocturna.com.mx/login";
   } else {
     console.log("No user logged in");
   }
