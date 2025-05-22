@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Biblioteca Nocturna</title>
+  <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #firebaseui-auth-container {
+      display: inline-block;
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create Your Account</h1>
+  <div id="firebaseui-auth-container"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwsCEXZ61tO3l8L3NQHAP9IgI07nRTNmA",
+      authDomain: "bibliotecanocturnaauth.firebaseapp.com",
+      projectId: "bibliotecanocturnaauth",
+      storageBucket: "bibliotecanocturnaauth.appspot.com",
+      messagingSenderId: "627241133847",
+      appId: "1:627241133847:web:27f2b56650fe72457f7952",
+      measurementId: "G-9NPSSS6GDP"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    ui.start('#firebaseui-auth-container', {
+      signInFlow: 'popup',
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+      ],
+      callbacks: {
+        signInSuccessWithAuthResult: async function(authResult, redirectUrl) {
+          const user = authResult.user;
+
+          const db = firebase.firestore();
+
+          // Save user info to Firestore "approvedUsers" collection
+          await db.collection("approvedUsers").doc(user.uid).set({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName || '',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+
+          // Redirect to ABS login page
+          window.location.href = "https://listen.bibliotecanocturna.com.mx/login";
+          return false;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
