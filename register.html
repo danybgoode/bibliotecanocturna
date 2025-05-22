@@ -30,6 +30,7 @@
   <div id="firebaseui-auth-container"></div>
 
   <script>
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyDwsCEXZ61tO3l8L3NQHAP9IgI07nRTNmA",
       authDomain: "bibliotecanocturnaauth.firebaseapp.com",
@@ -41,7 +42,7 @@
     };
 
     firebase.initializeApp(firebaseConfig);
-
+    const db = firebase.firestore();
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
     ui.start('#firebaseui-auth-container', {
@@ -53,20 +54,39 @@
       callbacks: {
         signInSuccessWithAuthResult: async function(authResult, redirectUrl) {
           const user = authResult.user;
+          const email = user.email;
+          const uid = user.uid;
 
-          const db = firebase.firestore();
+          try {
+            // 1. Add user to Firestore collection
+            await db.collection("approvedUsers").doc(uid).set({
+              uid: uid,
+              email: email,
+              displayName: user.displayName || '',
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
 
-          // Save user info to Firestore "approvedUsers" collection
-          await db.collection("approvedUsers").doc(user.uid).set({
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName || '',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
+            // 2. Also create user in Flask backend + Audiobookshelf
+            await fetch("https://api.librerianocturna.com.mx/api/signup", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                email: email,
+                password: uid,   // use uid as password for now (can be random or handled better later)
+                plan: "freemium"
+              })
+            });
 
-          // Redirect to ABS login page
-          window.location.href = "https://listen.bibliotecanocturna.com.mx/login";
-          return false;
+            // 3. Redirect to ABS
+            window.location.href = "https://listen.bibliotecanocturna.com.mx/login";
+            return false;
+          } catch (error) {
+            console.error("Signup error:", error);
+            alert("There was an error completing your registration. Please try again.");
+            return false;
+          }
         }
       }
     });
