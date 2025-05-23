@@ -4,30 +4,13 @@
   <meta charset="UTF-8">
   <title>Redirigiendo…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      background: #0d0d0d;
-      color: #fff;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    .countdown {
-      font-size: 2rem;
-      margin-top: 1rem;
-      color: #aaa;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1>¡Bienvenido a la Biblioteca Nocturna!</h1>
-  <p>Tu cuenta ha sido creada exitosamente.</p>
-  <p>Serás redirigido a tu biblioteca en unos segundos…</p>
-  <div class="countdown" id="countdown">3</div>
+<body class="bg-black text-white font-sans flex flex-col justify-center items-center h-screen text-center">
+  <h1 class="text-2xl font-bold mb-2">¡Bienvenido a la Biblioteca Nocturna!</h1>
+  <p class="mb-2">Tu cuenta ha sido creada exitosamente.</p>
+  <p class="mb-4">Serás redirigido a tu biblioteca en unos segundos…</p>
+  <div id="countdown" class="text-2xl text-gray-400">3</div>
 
   <script>
     let seconds = 3;
