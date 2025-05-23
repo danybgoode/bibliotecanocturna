@@ -45,7 +45,7 @@
 
     ui.start('#firebaseui-auth-container', {
       signInFlow: 'popup',
-      signInSuccessUrl: '/success.html',  // ✅ this suppresses the warning
+      // signInSuccessUrl: '/success.html', // ❌ Remove this line if you handle redirect in callback
       signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
@@ -69,12 +69,12 @@
               })
             });
 
-            window.location.href = "/success.html";  // ✅ your custom redirect
-            return false;  // ✅ suppresses FirebaseUI's auto redirect
+            window.location.href = "/success.html"; // ✅ your custom redirect
+            return false; // ✅ suppresses FirebaseUI's auto redirect
           } catch (error) {
             console.error("Signup error:", error);
             alert("There was an error completing your registration. Please try again.");
-            return false;
+            return false; // Always return false if you're handling the redirect or error.
           }
         }
       }
