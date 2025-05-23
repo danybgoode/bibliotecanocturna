@@ -47,6 +47,7 @@
 
     ui.start('#firebaseui-auth-container', {
       signInFlow: 'popup',
+      signInSuccessUrl: '/success.html',  // ✅ this suppresses the warning
       signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
@@ -58,7 +59,6 @@
           const uid = user.uid;
 
           try {
-            // 1. Add user to Firestore collection
             await db.collection("approvedUsers").doc(uid).set({
               uid: uid,
               email: email,
@@ -66,7 +66,6 @@
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
 
-            // 2. Also create user in Flask backend + Audiobookshelf
             await fetch("https://api.bibliotecanocturna.com.mx/api/signup", {
               method: "POST",
               headers: {
@@ -74,14 +73,13 @@
               },
               body: JSON.stringify({
                 email: email,
-                password: uid,   // use uid as password for now (can be random or handled better later)
+                password: uid,
                 plan: "freemium"
               })
             });
 
-            // 3. Redirect to ABS
-            window.location.href = "/success.html";
-            return false;
+            window.location.href = "/success.html";  // ✅ your custom redirect
+            return false;  // ✅ suppresses FirebaseUI's auto redirect
           } catch (error) {
             console.error("Signup error:", error);
             alert("There was an error completing your registration. Please try again.");
