@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finalizing Registration...</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <h1>Setting up your account...</h1>
+  <p>You'll be redirected shortly.</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const uid = params.get("uid");
+    const email = params.get("email");
+
+    if (uid && email) {
+      fetch("https://api.bibliotecanocturna.com.mx/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: decodeURIComponent(email),
+          password: uid,
+          plan: "freemium"
+        })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Signup failed");
+        window.location.href = "https://listen.bibliotecanocturna.com.mx/login";
+      })
+      .catch(err => {
+        console.error(err);
+        document.body.innerHTML = "<h1>⚠️ Registration failed</h1><p>Please try again later.</p>";
+      });
+    } else {
+      document.body.innerHTML = "<h1>⚠️ Invalid registration info</h1>";
+    }
+  </script>
+</body>
+</html>

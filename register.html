@@ -29,7 +29,6 @@
   <div id="firebaseui-auth-container"></div>
 
   <script>
-    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyDwsCEXZ61tO3l8L3NQHAP9IgI07nRTNmA",
       authDomain: "bibliotecanocturnaauth.firebaseapp.com",
@@ -45,37 +44,19 @@
 
     ui.start('#firebaseui-auth-container', {
       signInFlow: 'popup',
-      // signInSuccessUrl: '/success.html', // ❌ Remove this line if you handle redirect in callback
       signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
       ],
       callbacks: {
-        signInSuccessWithAuthResult: async function(authResult, redirectUrl) {
+        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
           const user = authResult.user;
-          const email = user.email;
+          const email = encodeURIComponent(user.email);
           const uid = user.uid;
 
-          try {
-            await fetch("https://api.bibliotecanocturna.com.mx/api/signup", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                email: email,
-                password: uid,
-                plan: "freemium"
-              })
-            });
-
-            window.location.href = "/success.html"; // ✅ your custom redirect
-            return false; // ✅ suppresses FirebaseUI's auto redirect
-          } catch (error) {
-            console.error("Signup error:", error);
-            alert("There was an error completing your registration. Please try again.");
-            return false; // Always return false if you're handling the redirect or error.
-          }
+          // Redirect to intermediary splash screen
+          window.location.href = `/registering.html?uid=${uid}&email=${email}`;
+          return false; // prevent default redirect
         }
       }
     });
