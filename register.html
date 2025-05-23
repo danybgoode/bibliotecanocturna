@@ -44,7 +44,7 @@
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
     ui.start('#firebaseui-auth-container', {
-      signInFlow: 'redirect',
+      signInFlow: 'popup',
       // signInSuccessUrl: '/success.html', // ❌ Remove this line if you handle redirect in callback
       signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
