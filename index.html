@@ -1,100 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biblioteca Nocturna</title>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
-  
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUNCAMÁS - Tu biblioteca de terror y ciencia ficción</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'purple-deep': '#6B46C1',
+                        'pink-electric': '#EC4899',
+                        'gray-lunar': '#1F2937',
+                        'purple-light': '#A855F7'
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-black text-white font-sans leading-relaxed">
+<body class="bg-black text-white font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-purple-deep/30">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-purple-deep to-pink-electric rounded-sm"></div>
+                <span class="text-xl font-mono font-bold">NUNCAMÁS</span>
+            </div>
+            <a href="https://buy.stripe.com/test_aFa6oJfgCgTz5Y0cDg9sk00" 
+               class="bg-gradient-to-r from-purple-deep to-pink-electric px-6 py-2 font-mono font-bold text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-purple-deep/25 transition-all duration-300 border-2 border-transparent hover:border-white/10">
+                Sumérgete por $0
+            </a>
+        </div>
+    </nav>
 
-  <!-- Hero Section -->
-  <section id="hero" class="text-center p-12">
-    <h1 class="text-4xl md:text-6xl font-bold">The Shudder of Audiobooks</h1>
-    <p class="mt-4 text-lg md:text-xl text-gray-300">Streaming horror & sci-fi stories that haunt, thrill, and hypnotize.</p>
-    <div class="mt-6 space-x-4">
-      <a href="register.html" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded text-white font-semibold">Sign Up Free</a>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                TU PRÓXIMA
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-deep to-pink-electric">
+                    PESADILLA
+                </span>
+                TE ESPERA
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                La única biblioteca especializada en terror y ciencia ficción que despierta tus sentidos más oscuros
+            </p>
+            <div class="space-y-4 mb-12">
+                <a href="https://buy.stripe.com/test_aFa6oJfgCgTz5Y0cDg9sk00" 
+                   class="inline-block bg-gradient-to-r from-purple-deep to-pink-electric px-12 py-4 font-mono font-bold text-lg uppercase tracking-wider hover:shadow-xl hover:shadow-purple-deep/30 transition-all duration-300 border-2 border-transparent hover:border-white/20">
+                    Empieza tu descenso - 5 días gratis
+                </a>
+                <p class="text-sm text-gray-400">
+                    Después solo $69 MXN/mes • Cancela cuando quieras
+                </p>
+            </div>
+            <div class="grid grid-cols-3 gap-8 max-w-md mx-auto text-center">
+                <div>
+                    <div class="text-2xl font-black text-pink-electric">500+</div>
+                    <div class="text-xs uppercase tracking-wide text-gray-400">Audiolibros</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-black text-purple-light">0</div>
+                    <div class="text-xs uppercase tracking-wide text-gray-400">Publicidad</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-black text-white">∞</div>
+                    <div class="text-xs uppercase tracking-wide text-gray-400">Pesadillas</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Preview Section -->
-  <section id="preview" class="p-12 bg-gray-900">
-    <h2 class="text-3xl font-bold mb-4">Listen to a Taste of the Dark</h2>
-    <div class="grid gap-6 md:grid-cols-2">
-      <audio controls class="w-full bg-gray-800 rounded">
-        <source src="audio/snippet1.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-      <audio controls class="w-full bg-gray-800 rounded">
-        <source src="audio/snippet2.mp3" type="audio/mpeg" />
-      </audio>
-      <audio controls class="w-full bg-gray-800 rounded">
-        <source src="audio/snippet3.mp3" type="audio/mpeg" />
-      </audio>
-      <audio controls class="w-full bg-gray-800 rounded">
-        <source src="audio/snippet4.mp3" type="audio/mpeg" />
-      </audio>
-    </div>
-  </section>
+    <!-- Featured Authors -->
+    <section class="py-16 px-6 bg-gray-lunar/50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-black mb-12 text-center uppercase tracking-wide">
+                Maestros del <span class="text-pink-electric">Mes</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center group">
+                    <div class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-purple-deep to-pink-electric rounded-full p-1">
+                        <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center">
+                            <span class="text-2xl font-mono">HPL</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">H.P. Lovecraft</h3>
+                    <p class="text-gray-400 text-sm">El arquitecto del horror cósmico que reveló los secretos del universo que no deberíamos conocer.</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-purple-deep to-pink-electric rounded-full p-1">
+                        <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center">
+                            <span class="text-2xl font-mono">PKD</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Philip K. Dick</h3>
+                    <p class="text-gray-400 text-sm">Visionario que cuestionó la realidad misma y nos mostró futuros que ya vivimos.</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-purple-deep to-pink-electric rounded-full p-1">
+                        <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center">
+                            <span class="text-2xl font-mono">SK</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Stephen King</h3>
+                    <p class="text-gray-400 text-sm">El rey del terror moderno que convirtió lo cotidiano en nuestras peores pesadillas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Features Section -->
-  <section id="features" class="p-12">
-    <h2 class="text-3xl font-bold mb-6">Why Biblioteca Nocturna?</h2>
-    <ul class="grid gap-6 md:grid-cols-3 text-center">
-      <li class="bg-gray-800 p-6 rounded shadow">
-        <h3 class="text-xl font-semibold mb-2">Horror & Sci-Fi Only</h3>
-        <p class="text-gray-300">Curated for genre lovers. No fluff, no filler.</p>
-      </li>
-      <li class="bg-gray-800 p-6 rounded shadow">
-        <h3 class="text-xl font-semibold mb-2">Ad-Free Premium</h3>
-        <p class="text-gray-300">Stream without interruptions, ever.</p>
-      </li>
-      <li class="bg-gray-800 p-6 rounded shadow">
-        <h3 class="text-xl font-semibold mb-2">Mobile Access</h3>
-        <p class="text-gray-300">Listen on the go, wherever you dare.</p>
-      </li>
-    </ul>
-  </section>
+    <!-- Featured Audio Samples -->
+    <section class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-black mb-12 text-center uppercase tracking-wide">
+                Prueba el <span class="text-purple-light">Terror</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-lunar/30 p-6 border border-purple-deep/30 hover:border-pink-electric/50 transition-all duration-300">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-deep/20 to-pink-electric/20 mb-4 flex items-center justify-center border border-purple-deep/50">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-deep rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-2xl">▶</span>
+                            </div>
+                            <span class="text-sm font-mono">AUDIO SAMPLE</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">La Llamada de Cthulhu</h3>
+                    <p class="text-gray-400 text-sm mb-4">Escucha el despertar del horror más antiguo en esta narración que te transportará a las profundidades del océano.</p>
+                    <div class="text-xs text-purple-light font-mono">H.P. LOVECRAFT • 3:24</div>
+                </div>
+                
+                <div class="bg-gray-lunar/30 p-6 border border-purple-deep/30 hover:border-pink-electric/50 transition-all duration-300">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-deep/20 to-pink-electric/20 mb-4 flex items-center justify-center border border-purple-deep/50">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-deep rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-2xl">▶</span>
+                            </div>
+                            <span class="text-sm font-mono">AUDIO SAMPLE</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">¿Sueñan los Androides?</h3>
+                    <p class="text-gray-400 text-sm mb-4">Sumérgete en un futuro donde la línea entre humano y máquina se desvanece para siempre.</p>
+                    <div class="text-xs text-purple-light font-mono">PHILIP K. DICK • 4:12</div>
+                </div>
+                
+                <div class="bg-gray-lunar/30 p-6 border border-purple-deep/30 hover:border-pink-electric/50 transition-all duration-300">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-deep/20 to-pink-electric/20 mb-4 flex items-center justify-center border border-purple-deep/50">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-deep rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-2xl">▶</span>
+                            </div>
+                            <span class="text-sm font-mono">AUDIO SAMPLE</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">El Corazón Delator</h3>
+                    <p class="text-gray-400 text-sm mb-4">El latido que nunca cesa en esta obra maestra del terror psicológico que definió el género.</p>
+                    <div class="text-xs text-purple-light font-mono">EDGAR ALLAN POE • 2:47</div>
+                </div>
+                
+                <div class="bg-gray-lunar/30 p-6 border border-purple-deep/30 hover:border-pink-electric/50 transition-all duration-300">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-deep/20 to-pink-electric/20 mb-4 flex items-center justify-center border border-purple-deep/50">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-deep rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-2xl">▶</span>
+                            </div>
+                            <span class="text-sm font-mono">AUDIO SAMPLE</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Carrie</h3>
+                    <p class="text-gray-400 text-sm mb-4">Descubre cómo el bullying escolar se convierte en una pesadilla sobrenatural que cambió el horror para siempre.</p>
+                    <div class="text-xs text-purple-light font-mono">STEPHEN KING • 5:33</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://buy.stripe.com/test_aFa6oJfgCgTz5Y0cDg9sk00" 
+                   class="inline-block bg-gradient-to-r from-purple-deep to-pink-electric px-10 py-3 font-mono font-bold uppercase tracking-wider hover:shadow-xl hover:shadow-purple-deep/30 transition-all duration-300">
+                    Accede a toda la biblioteca
+                </a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Pricing Section -->
-  <section id="pricing" class="p-12 bg-gray-900 text-center">
-    <h2 class="text-3xl font-bold mb-6">Choose Your Plan</h2>
-    <div class="flex flex-col md:flex-row justify-center gap-6">
-      <div class="bg-gray-800 p-6 rounded shadow w-full md:w-1/3">
-        <h3 class="text-xl font-semibold mb-2">Freemium</h3>
-        <p class="text-2xl font-bold mb-4">Free</p>
-        <ul class="text-gray-300 space-y-2">
-          <li>🔊 Access to all stories</li>
-          <li>📢 Ads included</li>
-          <li>🕒 Limited offline access</li>
-        </ul>
-      </div>
-      <div class="bg-red-600 p-6 rounded shadow w-full md:w-1/3 text-white">
-        <h3 class="text-xl font-semibold mb-2">Premium</h3>
-        <p class="text-2xl font-bold mb-4">$4.99/month</p>
-        <ul class="space-y-2">
-          <li>🧠 No ads</li>
-          <li>🎧 Unlimited offline listening</li>
-          <li>📱 Mobile app access (coming soon)</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <!-- FAQ Section -->
+    <section class="py-16 px-6 bg-gray-lunar/50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-black mb-12 text-center uppercase tracking-wide">
+                Preguntas <span class="text-pink-electric">Frecuentes</span>
+            </h2>
+            <div class="space-y-8">
+                <div class="border-l-4 border-purple-deep pl-6">
+                    <h3 class="text-xl font-bold mb-2">¿Realmente son 5 días completamente gratis?</h3>
+                    <p class="text-gray-400">Sí. Cinco días completos para explorar toda nuestra biblioteca sin costo alguno. Si no te convencemos, cancela antes y no pagas nada.</p>
+                </div>
+                
+                <div class="border-l-4 border-pink-electric pl-6">
+                    <h3 class="text-xl font-bold mb-2">¿Qué tan grande es la biblioteca?</h3>
+                    <p class="text-gray-400">Más de 500 audiolibros cuidadosamente seleccionados de los mejores autores de terror y ciencia ficción, desde clásicos hasta novedades contemporáneas.</p>
+                </div>
+                
+                <div class="border-l-4 border-purple-light pl-6">
+                    <h3 class="text-xl font-bold mb-2">¿Puedo escuchar sin conexión a internet?</h3>
+                    <p class="text-gray-400">Por supuesto. Descarga tus audiolibros favoritos y llévalos contigo a cualquier lugar. Perfecto para el metro, viajes o esas noches sin internet.</p>
+                </div>
+                
+                <div class="border-l-4 border-purple-deep pl-6">
+                    <h3 class="text-xl font-bold mb-2">¿Cómo es la calidad del audio?</h3>
+                    <p class="text-gray-400">Solo trabajamos con narradores profesionales y audio de alta fidelidad. Cada susurro, cada grito, cada silencio se escucha como debe ser.</p>
+                </div>
+                
+                <div class="border-l-4 border-pink-electric pl-6">
+                    <h3 class="text-xl font-bold mb-2">¿Puedo cancelar cuando quiera?</h3>
+                    <p class="text-gray-400">Absolutamente. Sin contratos, sin penalizaciones. Si en algún momento decides que no es para ti, cancelas y listo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Call to Action -->
-  <section id="cta" class="p-12 text-center">
-    <h2 class="text-3xl font-bold mb-4">Ready to Enter the Dark?</h2>
-    <p class="text-lg mb-6 text-gray-300">Stream twisted tales and haunted sci-fi tonight.</p>
-    <a href="#" class="bg-red-600 hover:bg-red-700 px-8 py-4 rounded text-white font-semibold">Start Listening Free</a>
-  </section>
+    <!-- Service Description -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-black mb-8 uppercase tracking-wide">
+                ¿Qué Obtienes con <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-deep to-pink-electric">NUNCAMÁS</span>?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 mb-12">
+                <div class="text-left">
+                    <h3 class="text-xl font-bold mb-4 text-purple-light">5 Días Completamente Gratis</h3>
+                    <p class="text-gray-400 mb-6">Explora toda nuestra biblioteca sin restricciones. Escucha lo que quieras, cuando quieras. Si no te enamoraste del terror en 5 días, simplemente cancela.</p>
+                    
+                    <h3 class="text-xl font-bold mb-4 text-pink-electric">Después, Solo $69 MXN/Mes</h3>
+                    <p class="text-gray-400">Menos de lo que cuesta una ida al cine, pero con acceso ilimitado a cientos de horas de terror y ciencia ficción de la más alta calidad.</p>
+                </div>
+                
+                <div class="text-left">
+                    <h3 class="text-xl font-bold mb-4 text-purple-deep">Lo Que Incluye Tu Suscripción:</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-pink-electric mr-2">▸</span>
+                            Acceso ilimitado a toda la biblioteca
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-electric mr-2">▸</span>
+                            Descargas sin límite para escuchar offline
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-electric mr-2">▸</span>
+                            Audio de alta calidad, narraciones profesionales
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-electric mr-2">▸</span>
+                            Nuevos títulos cada semana
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-electric mr-2">▸</span>
+                            Curaduría experta por conocedores del género
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-electric mr-2">▸</span>
+                            Sin publicidad, sin interrupciones
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-purple-deep/20 to-pink-electric/20 p-8 border border-purple-deep/50 mb-8">
+                <h3 class="text-2xl font-black mb-4">Tu Ritual Nocturno Te Espera</h3>
+                <p class="text-gray-300 text-lg">Únete a miles de mexicanos que han convertido NUNCAMÁS en su compañía nocturna. Cada noche, una nueva pesadilla. Cada viaje, una nueva dimensión.</p>
+            </div>
+            
+            <a href="https://buy.stripe.com/test_aFa6oJfgCgTz5Y0cDg9sk00" 
+               class="inline-block bg-gradient-to-r from-purple-deep to-pink-electric px-12 py-4 font-mono font-bold text-lg uppercase tracking-wider hover:shadow-xl hover:shadow-purple-deep/30 transition-all duration-300 border-2 border-transparent hover:border-white/20">
+                Comienza Tu Descenso Ahora
+            </a>
+            <p class="text-sm text-gray-400 mt-4">
+                5 días gratis • Después $69 MXN/mes • Cancela cuando quieras
+            </p>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="p-6 bg-gray-800 text-center text-sm text-gray-400">
-    &copy; 2025 Biblioteca Nocturna. All rights reserved.
-  </footer>
+    <!-- Final CTA -->
+    <section class="py-20 px-6 bg-gradient-to-r from-purple-deep to-pink-electric">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                EL SILENCIO TAMBIÉN
+                <span class="block">DA MIEDO</span>
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                No dejes que el aburrimiento sea tu único terror
+            </p>
+            <a href="https://buy.stripe.com/test_aFa6oJfgCgTz5Y0cDg9sk00" 
+               class="inline-block bg-black px-12 py-4 font-mono font-bold text-lg uppercase tracking-wider hover:bg-gray-900 transition-all duration-300 border-2 border-black hover:border-white/20">
+                Rompe el Silencio
+            </a>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-black border-t border-purple-deep/30">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-br from-purple-deep to-pink-electric rounded-sm"></div>
+                <span class="text-2xl font-mono font-bold">NUNCAMÁS</span>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">
+                Tu biblioteca especializada en terror y ciencia ficción
+            </p>
+            <p class="text-gray-500 text-xs">
+                © 2025 NUNCAMÁS. Todos los derechos reservados. • Términos y Condiciones • Política de Privacidad
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-black');
+                nav.classList.remove('bg-black/90');
+            } else {
+                nav.classList.add('bg-black/90');
+                nav.classList.remove('bg-black');
+            }
+        });
+    </script>
 </body>
 </html>
